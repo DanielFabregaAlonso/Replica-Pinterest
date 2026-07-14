@@ -28,16 +28,13 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
   font-family: var(--sans);
   background: var(--bg);
   color: var(--text);
 }
 
-#app {
-  min-height: 100vh;
-}
-
-/* Header */
+/* Cabecera */
 
 .header {
   position: sticky;
@@ -90,7 +87,7 @@ body {
 .logo-icon {
   width: 28px;
   height: 28px;
-  fill: currentColor;
+  display: block;
 }
 
 .main-nav {
@@ -171,10 +168,16 @@ body {
   background: var(--surface);
 }
 
-.icon-btn svg {
+.icon-btn-icon {
   width: 22px;
   height: 22px;
-  fill: currentColor;
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .icon-btn-icon {
+    filter: invert(1);
+  }
 }
 
 .menu-toggle {
@@ -243,14 +246,14 @@ body {
   text-align: left;
 }
 
-/* Icons appear once there's room for them, before the full nav does */
+/* Los iconos aparecen en cuanto hay espacio para ellos, antes que el menú completo */
 @media (min-width: 700px) {
   .icon-btn {
     display: flex;
   }
 }
 
-/* Full nav replaces the hamburger once the header has room for everything */
+/* El menú completo sustituye al hamburguesa cuando la cabecera tiene espacio para todo */
 @media (min-width: 960px) {
   .main-nav {
     display: flex;
@@ -263,7 +266,7 @@ body {
   }
 }
 
-/* Grid */
+/* Cuadrícula */
 
 .grid {
   column-count: 2;
@@ -307,7 +310,7 @@ body {
   color: var(--accent);
 }
 
-/* Pin */
+/* Pin (tarjeta de imagen) */
 
 .pin {
   break-inside: avoid;
@@ -366,7 +369,7 @@ body {
   text-decoration: underline;
 }
 
-/* Footer */
+/* Pie de página */
 
 .footer {
   border-top: 1px solid var(--border);
