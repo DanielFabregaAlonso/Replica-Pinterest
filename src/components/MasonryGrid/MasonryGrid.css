@@ -1,0 +1,41 @@
+.grid {
+  column-count: 2;
+  column-gap: 16px;
+  padding: 16px;
+}
+
+@media (min-width: 560px) {
+  .grid {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 800px) {
+  .grid {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    column-count: 5;
+  }
+}
+
+@media (min-width: 1400px) {
+  .grid {
+    column-count: 6;
+  }
+}
+
+.grid-message {
+  column-span: all;
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 48px 16px;
+  font-size: 16px;
+}
+
+.grid-message--error {
+  color: var(--accent);
+}

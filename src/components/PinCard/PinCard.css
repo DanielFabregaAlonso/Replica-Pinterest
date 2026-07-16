@@ -1,0 +1,56 @@
+.pin {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+.pin-link {
+  display: block;
+  text-decoration: none;
+}
+
+.pin-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.pin-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.pin-link:hover .pin-image {
+  transform: scale(1.03);
+}
+
+.pin-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+}
+
+.pin-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.pin-author {
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pin-author:hover {
+  text-decoration: underline;
+}

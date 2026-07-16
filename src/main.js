@@ -1,7 +1,10 @@
 import './style.css'
-import { initHeader } from './components/Header.js'
-import { setPhotos, setLoading, setError } from './components/MasonryGrid.js'
+import { createHeader } from './components/Header/Header.js'
+import { createFooter } from './components/Footer/Footer.js'
+import { getGridElement, setPhotos, setLoading, setError } from './components/MasonryGrid/MasonryGrid.js'
 import { listPhotos, searchPhotos } from './api/unsplash.js'
+
+const app = document.querySelector('#app')
 
 let initialPhotos = null
 
@@ -36,5 +39,9 @@ function handleLogoClick() {
   }
 }
 
-initHeader({ onSearch: handleSearch, onLogoClick: handleLogoClick })
+const header = createHeader({ onSearch: handleSearch, onLogoClick: handleLogoClick })
+const footer = createFooter()
+
+app.append(header, getGridElement(), footer)
+
 loadInitialPhotos()
