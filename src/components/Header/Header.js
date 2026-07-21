@@ -12,11 +12,21 @@ export function createHeader({ onSearch, onLogoClick }) {
   const navHome = createElement('button', { type: 'button', class: 'nav-link nav-link--home', text: 'Inicio' })
   const navExplore = createElement('button', { type: 'button', class: 'nav-link', text: 'Explorar' })
   const navCreate = createElement('button', { type: 'button', class: 'nav-link', text: 'Crear' })
-  const mainNav = createElement('nav', { class: 'main-nav', 'aria-label': 'Navegación principal' }, [
-    navHome,
-    navExplore,
-    navCreate,
-  ])
+  const navNotifications = createElement('button', {
+    type: 'button',
+    class: 'nav-link nav-link--mobile-only',
+    text: 'Notificaciones',
+  })
+  const navProfile = createElement('button', {
+    type: 'button',
+    class: 'nav-link nav-link--mobile-only',
+    text: 'Perfil',
+  })
+  const mainNav = createElement(
+    'nav',
+    { id: 'mobile-menu', class: 'main-nav', 'aria-label': 'Navegación principal', hidden: '' },
+    [navHome, navExplore, navCreate, navNotifications, navProfile]
+  )
 
   const headerStart = createElement('div', { class: 'header-start' }, [logoButton, mainNav])
 
@@ -64,25 +74,10 @@ export function createHeader({ onSearch, onLogoClick }) {
     menuToggle,
   ])
 
-  const mobileHome = createElement('button', { type: 'button', class: 'nav-link nav-link--home', text: 'Inicio' })
-  const mobileExplore = createElement('button', { type: 'button', class: 'nav-link', text: 'Explorar' })
-  const mobileCreate = createElement('button', { type: 'button', class: 'nav-link', text: 'Crear' })
-  const mobileNotifications = createElement('button', {
-    type: 'button',
-    class: 'nav-link',
-    text: 'Notificaciones',
-  })
-  const mobileProfile = createElement('button', { type: 'button', class: 'nav-link', text: 'Perfil' })
-  const mobileMenu = createElement(
-    'nav',
-    { id: 'mobile-menu', class: 'mobile-menu', 'aria-label': 'Navegación móvil', hidden: '' },
-    [mobileHome, mobileExplore, mobileCreate, mobileNotifications, mobileProfile]
-  )
-
-  const header = createElement('header', { class: 'header' }, [headerStart, searchForm, headerEnd, mobileMenu])
+  const header = createElement('header', { class: 'header' }, [headerStart, searchForm, headerEnd])
 
   function closeMobileMenu() {
-    mobileMenu.hidden = true
+    mainNav.hidden = true
     menuToggle.setAttribute('aria-expanded', 'false')
     header.classList.remove('menu-open')
   }
@@ -95,11 +90,10 @@ export function createHeader({ onSearch, onLogoClick }) {
 
   logoButton.addEventListener('click', resetToHome)
   navHome.addEventListener('click', resetToHome)
-  mobileHome.addEventListener('click', resetToHome)
 
   menuToggle.addEventListener('click', () => {
     const isOpen = header.classList.toggle('menu-open')
-    mobileMenu.hidden = !isOpen
+    mainNav.hidden = !isOpen
     menuToggle.setAttribute('aria-expanded', String(isOpen))
   })
 

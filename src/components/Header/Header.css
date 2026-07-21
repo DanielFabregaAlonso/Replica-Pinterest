@@ -53,9 +53,27 @@
 }
 
 .main-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.main-nav[hidden] {
   display: none;
-  align-items: center;
-  gap: 4px;
+}
+
+.main-nav .nav-link {
+  display: block;
+  width: 100%;
+  text-align: left;
 }
 
 .nav-link {
@@ -185,29 +203,6 @@
   transform: translateY(-6px) rotate(-45deg);
 }
 
-.mobile-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  flex-direction: column;
-  gap: 2px;
-  padding: 8px;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-}
-
-.mobile-menu:not([hidden]) {
-  display: flex;
-}
-
-.mobile-menu .nav-link {
-  display: block;
-  width: 100%;
-  text-align: left;
-}
-
 /* Los iconos aparecen en cuanto hay espacio para ellos, antes que el menú completo */
 @media (min-width: 700px) {
   .icon-btn {
@@ -218,12 +213,31 @@
 /* El menú completo sustituye al hamburguesa cuando la cabecera tiene espacio para todo */
 @media (min-width: 960px) {
   .main-nav {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    background: transparent;
+    border-bottom: none;
+    box-shadow: none;
+  }
+
+  .main-nav[hidden] {
     display: flex;
   }
 
-  .menu-toggle,
-  .mobile-menu,
-  .mobile-menu:not([hidden]) {
+  .main-nav .nav-link {
+    display: inline-flex;
+    width: auto;
+    text-align: center;
+  }
+
+  .main-nav .nav-link--mobile-only {
+    display: none;
+  }
+
+  .menu-toggle {
     display: none;
   }
 }

@@ -1,5 +1,13 @@
 import './PinCard.css'
 import { createElement } from '../../utils/createElement.js'
+import { getPhotoStatistics } from '../../api/unsplash.js'
+
+function formatCount(value) {
+  if (value === null || value === undefined) return '—'
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1).replace(/\.0$/, '')}M`
+  if (value >= 1000) return `${(value / 1000).toFixed(1).replace(/\.0$/, '')}k`
+  return String(value)
+}
 
 export function createPinCard(photo) {
   const description = photo.alt_description || photo.description || 'Imagen de Unsplash'
@@ -13,10 +21,28 @@ export function createPinCard(photo) {
     loading: 'lazy',
   })
 
+  const viewsValue = createElement('span', { class: 'pin-stat-value', text: '…' })
+  const viewsStat = createElement(
+    'span',
+    { class: 'pin-stat', 'aria-label': 'Visualizaciones' },
+    [createElement('img', { src: '/icon-eye.svg', class: 'pin-stat-icon', alt: '' }), viewsValue]
+  )
+
+  const likesValue = createElement('span', { class: 'pin-stat-value', text: formatCount(photo.likes) })
+  const likesStat = createElement(
+    'span',
+    { class: 'pin-stat', 'aria-label': 'Me gusta' },
+    [createElement('img', { src: '/icon-heart.svg', class: 'pin-stat-icon', alt: '' }), likesValue]
+  )
+
+  const overlay = createElement('div', { class: 'pin-overlay' }, [
+    createElement('div', { class: 'pin-stats' }, [viewsStat, likesStat]),
+  ])
+
   const imageWrapper = createElement(
     'div',
     { class: 'pin-image-wrapper', style: `aspect-ratio: ${photo.width} / ${photo.height}` },
-    [image]
+    [image, overlay]
   )
 
   const link = createElement(
@@ -24,6 +50,19 @@ export function createPinCard(photo) {
     { class: 'pin-link', href: photo.links.html, target: '_blank', rel: 'noopener noreferrer' },
     [imageWrapper]
   )
+
+  let statsRequested = false
+  link.addEventListener('mouseenter', () => {
+    if (statsRequested) return
+    statsRequested = true
+    getPhotoStatistics(photo.id)
+      .then((stats) => {
+        viewsValue.textContent = formatCount(stats.views?.total)
+      })
+      .catch(() => {
+        viewsValue.textContent = '—'
+      })
+  })
 
   const avatar = createElement('img', {
     class: 'pin-avatar',

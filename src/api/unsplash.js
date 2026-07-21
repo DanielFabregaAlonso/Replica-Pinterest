@@ -39,3 +39,7 @@ export function listPhotos(page = 1) {
     order_by: 'popular',
   })
 }
+
+export function getPhotoStatistics(id) {
+  return request(`/photos/${id}/statistics`)
+}

@@ -9,10 +9,46 @@
 }
 
 .pin-image-wrapper {
+  position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: 16px;
   background: var(--surface);
+}
+
+.pin-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55) 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.pin-link:hover .pin-overlay {
+  opacity: 1;
+}
+
+.pin-stats {
+  display: flex;
+  gap: 14px;
+  padding: 10px 12px;
+}
+
+.pin-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pin-stat-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .pin-image {
