@@ -25,14 +25,14 @@ export function createPinCard(photo) {
   const viewsStat = createElement(
     'span',
     { class: 'pin-stat', 'aria-label': 'Visualizaciones' },
-    [createElement('img', { src: '/icon-eye.svg', class: 'pin-stat-icon', alt: '' }), viewsValue]
+    [createElement('img', { src: '/icon-eye.png', class: 'pin-stat-icon', alt: '' }), viewsValue]
   )
 
   const likesValue = createElement('span', { class: 'pin-stat-value', text: formatCount(photo.likes) })
   const likesStat = createElement(
     'span',
     { class: 'pin-stat', 'aria-label': 'Me gusta' },
-    [createElement('img', { src: '/icon-heart.svg', class: 'pin-stat-icon', alt: '' }), likesValue]
+    [createElement('img', { src: '/icon-heart.png', class: 'pin-stat-icon', alt: '' }), likesValue]
   )
 
   const overlay = createElement('div', { class: 'pin-overlay' }, [
